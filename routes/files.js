@@ -31,7 +31,7 @@ router.post('/',upload.single('myfile'), async(req,res)=>{
 
     console.log(file);
     const response = await file.save();
-    return res.json({file: `${process.env.APP_BASE_URL}/files/${response.uuid}`});
+    return res.json({file: `${process.env.APP_BASE_URL}files/${response.uuid}`});
 
 })
 
@@ -60,7 +60,7 @@ router.post('/send', async (req,res)=>{
         text: `${emailFrom} has sent you a file`,
         html: require('../services/emailTemplate')({
             emailFrom: emailFrom,
-            downloadLink: `${process.env.APP_BASE_URL}/files/${file.uuid}`,
+            downloadLink: `${process.env.APP_BASE_URL}files/${file.uuid}`,
             size: parseInt(file.size/1000) + 'KB',
             expires: "24 hours"
         })
